@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>從 AI 焦慮到 AI 複利｜建立你的第二大腦</title>
+
+  <!-- ============================================================ -->
+  <!-- Reveal.js v5 + Highlight (CDN) — 無須安裝，瀏覽器直接開      -->
+  <!-- ============================================================ -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reset.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" id="theme">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css">
+
+  <!-- 中文字型 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* =========================================================== */
+    /* DESIGN SYSTEM                                                */
+    /* =========================================================== */
+    :root {
+      --accent:        #7dd3fc;
+      --accent-strong: #38bdf8;
+      --warning:       #fbbf24;
+      --success:       #4ade80;
+      --danger:        #f87171;
+      --magenta:       #f472b6;
+      --bg:            #0a0a0f;
+      --bg-soft:       #16161f;
+      --bg-card:       #1c1c28;
+      --border:        #2a2a3a;
+      --text:          #f1f5f9;
+      --text-dim:      #94a3b8;
+    }
+
+    .reveal {
+      font-family: 'Noto Sans TC', system-ui, -apple-system, sans-serif;
+      font-size: 28px;
+      color: var(--text);
+      background: var(--bg);
+    }
+
+    .reveal .slides section {
+      text-align: left;
+      padding: 30px 40px;
+      height: 100%;
+    }
+
+    .reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+      font-family: 'Noto Sans TC', system-ui, sans-serif;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      text-transform: none;
+      margin: 0 0 0.5em 0;
+    }
+    .reveal h1 { font-size: 2.6em; line-height: 1.15; }
+    .reveal h2 { font-size: 1.7em; line-height: 1.2; }
+    .reveal h3 { font-size: 1.2em; line-height: 1.3; }
+    .reveal p  { line-height: 1.55; margin: 0.5em 0; }
+
+    .reveal pre, .reveal code {
+      font-family: 'JetBrains Mono', 'Consolas', monospace;
+    }
+    .reveal pre {
+      box-shadow: none;
+      width: 100%;
+      font-size: 0.7em;
+    }
+    .reveal pre code {
+      padding: 1em;
+      border-radius: 8px;
+      max-height: none;
+    }
+
+    /* =========================================================== */
+    /* TITLE & SECTION DIVIDER                                      */
+    /* =========================================================== */
+    .title-slide {
+      text-align: center !important;
+      display: flex !important;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .title-slide h1 {
+      font-size: 3.2em;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--magenta) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.3em;
+    }
+    .title-slide .subtitle {
+      font-size: 1.1em;
+      color: var(--text-dim);
+      margin-bottom: 2em;
+      line-height: 1.6;
+    }
+    .title-slide .speaker {
+      font-size: 0.7em;
+      color: var(--text-dim);
+      border-top: 1px solid var(--border);
+      padding-top: 1em;
+      margin-top: 1.5em;
+    }
+
+    .section-divider {
+      text-align: center !important;
+      background: radial-gradient(circle at 30% 50%, rgba(125, 211, 252, 0.1), transparent 60%),
+                  radial-gradient(circle at 70% 50%, rgba(244, 114, 182, 0.1), transparent 60%),
+                  var(--bg);
+    }
+    .section-divider .section-number {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1em;
+      color: var(--accent);
+      letter-spacing: 0.3em;
+      margin-bottom: 0.8em;
+    }
+    .section-divider h1 {
+      font-size: 3.5em;
+      opacity: 0.95;
+    }
+
+    /* =========================================================== */
+    /* TYPOGRAPHIC PATTERNS                                         */
+    /* =========================================================== */
+    .key-quote {
+      font-size: 1.6em;
+      line-height: 1.5;
+      font-weight: 700;
+      text-align: center;
+      padding: 0.8em 1.2em;
+      border-left: 4px solid var(--accent);
+      background: rgba(125, 211, 252, 0.05);
+      border-radius: 0 12px 12px 0;
+    }
+
+    .mega-quote {
+      font-size: 2em;
+      line-height: 1.4;
+      font-weight: 900;
+      text-align: center;
+      color: var(--accent);
+      padding: 1em 0;
+    }
+
+    .lead {
+      font-size: 1.15em;
+      color: var(--text-dim);
+      margin: 1em 0;
+    }
+
+    /* =========================================================== */
+    /* LAYOUT                                                       */
+    /* =========================================================== */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      align-items: start;
+    }
+    .three-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1em 1.2em;
+      margin-bottom: 0.8em;
+    }
+    .card-title {
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 0.3em;
+      font-size: 1em;
+    }
+    .card small {
+      color: var(--text-dim);
+      line-height: 1.5;
+      display: block;
+    }
+
+    /* Versus comparison */
+    .vs-grid {
+      display: grid;
+      grid-template-columns: 1fr 60px 1fr;
+      gap: 20px;
+      align-items: stretch;
+    }
+    .vs-col {
+      background: var(--bg-card);
+      padding: 1.2em;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+    .vs-col.bad  { border-color: rgba(248, 113, 113, 0.4); }
+    .vs-col.good { border-color: rgba(74, 222, 128, 0.4); }
+    .vs-col h3 { margin-bottom: 0.5em; }
+    .vs-divider {
+      text-align: center;
+      font-size: 1.5em;
+      font-weight: 900;
+      color: var(--text-dim);
+      align-self: center;
+    }
+
+    /* Lists */
+    .reveal ul, .reveal ol {
+      list-style: none;
+      padding-left: 0;
+      margin: 0.5em 0;
+    }
+    .reveal ul li, .reveal ol li {
+      margin: 0.4em 0;
+      line-height: 1.55;
+      padding-left: 1.4em;
+      position: relative;
+    }
+    .reveal ul li::before {
+      content: '▸';
+      color: var(--accent);
+      position: absolute;
+      left: 0;
+      font-weight: 700;
+    }
+    .reveal ol {
+      counter-reset: ol-counter;
+    }
+    .reveal ol li {
+      counter-increment: ol-counter;
+    }
+    .reveal ol li::before {
+      content: counter(ol-counter, decimal-leading-zero);
+      color: var(--accent);
+      position: absolute;
+      left: 0;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      font-size: 0.85em;
+    }
+
+    /* Inline highlights */
+    .highlight         { color: var(--accent);  font-weight: 700; }
+    .highlight-warning { color: var(--warning); font-weight: 700; }
+    .highlight-success { color: var(--success); font-weight: 700; }
+    .highlight-danger  { color: var(--danger);  font-weight: 700; }
+    .highlight-bg {
+      background: rgba(125, 211, 252, 0.15);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+    .path {
+      font-family: 'JetBrains Mono', monospace;
+      background: var(--bg-soft);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.88em;
+      color: var(--accent);
+    }
+
+    /* Tags */
+    .tag {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 0.4em;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      vertical-align: middle;
+      margin-left: 0.5em;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .tag-core { background: rgba(74, 222, 128, 0.2);  color: var(--success); }
+    .tag-swap { background: rgba(251, 191, 36, 0.2);  color: var(--warning); }
+    .tag-demo { background: rgba(244, 114, 182, 0.2); color: var(--magenta); }
+    .tag-opt  { background: rgba(148, 163, 184, 0.2); color: var(--text-dim); }
+
+    /* Module label */
+    .module-label {
+      position: absolute;
+      top: 18px;
+      left: 40px;
+      font-size: 0.45em;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--text-dim);
+      letter-spacing: 0.15em;
+      opacity: 0.7;
+    }
+    .speaker-hint {
+      position: absolute;
+      bottom: 12px;
+      right: 30px;
+      font-size: 0.45em;
+      color: var(--magenta);
+      font-family: 'JetBrains Mono', monospace;
+      opacity: 0.7;
+      max-width: 50%;
+      text-align: right;
+    }
+
+    /* Demo callout */
+    .demo-callout {
+      background: linear-gradient(135deg, rgba(244, 114, 182, 0.12), rgba(168, 85, 247, 0.12));
+      border: 2px dashed var(--magenta);
+      border-radius: 16px;
+      padding: 2em;
+      text-align: center;
+    }
+    .demo-callout .demo-label {
+      color: var(--magenta);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7em;
+      letter-spacing: 0.25em;
+      margin-bottom: 0.5em;
+    }
+
+    /* Big number */
+    .big-num {
+      font-size: 4em;
+      font-weight: 900;
+      color: var(--accent);
+      line-height: 1;
+      font-family: 'JetBrains Mono', monospace;
+      text-align: center;
+      margin: 0.2em 0;
+    }
+
+    /* Image placeholder */
+    .img-placeholder {
+      background: var(--bg-soft);
+      border: 2px dashed var(--text-dim);
+      border-radius: 12px;
+      padding: 3em 2em;
+      text-align: center;
+      color: var(--text-dim);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85em;
+    }
+
+    /* Progress bar / slide number */
+    .reveal .progress { color: var(--accent); height: 4px; }
+    .reveal .slide-number {
+      background: transparent;
+      color: var(--text-dim);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Markdown code highlight tweaks */
+    .hljs { background: var(--bg-soft) !important; }
+
+    /* =========================================================== */
+    /* ANIMATIONS — 讓 HTML 簡報跳脫 PPTX 感                       */
+    /* =========================================================== */
+
+    /* Title h1 — 持續漸層位移 */
+    @keyframes gradient-shift {
+      0%, 100% { background-position: 0% 50%; }
+      50%      { background-position: 100% 50%; }
+    }
+    .title-slide h1 {
+      background-size: 200% 200%;
+      animation: gradient-shift 6s ease-in-out infinite;
+    }
+
+    /* Section divider 入場 */
+    @keyframes section-entrance {
+      from { transform: translateY(30px); opacity: 0; }
+      to   { transform: translateY(0);    opacity: 1; }
+    }
+    .reveal .section-divider.present h1 {
+      animation: section-entrance 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    .reveal .section-divider.present .section-number {
+      animation: section-entrance 0.6s ease-out;
+    }
+
+    /* Big number — 彈跳放大 */
+    @keyframes big-num-pop {
+      0%   { transform: scale(0.4);  opacity: 0; }
+      60%  { transform: scale(1.18); opacity: 1; }
+      100% { transform: scale(1); }
+    }
+    .reveal section.present .big-num {
+      animation: big-num-pop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    /* Quote 漸入 */
+    @keyframes fade-up {
+      from { transform: translateY(20px); opacity: 0; }
+      to   { transform: translateY(0);    opacity: 1; }
+    }
+    .reveal section.present .mega-quote { animation: fade-up 0.9s ease-out; }
+    .reveal section.present .key-quote  { animation: fade-up 0.6s ease-out; }
+
+    /* VS 對比左右滑入 */
+    @keyframes slide-in-left  { from { transform: translateX(-30px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+    @keyframes slide-in-right { from { transform: translateX( 30px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+    @keyframes fade-in        { from { opacity: 0; } to { opacity: 1; } }
+    .reveal section.present .vs-col.bad  { animation: slide-in-left  0.6s ease-out; }
+    .reveal section.present .vs-col.good { animation: slide-in-right 0.6s ease-out 0.1s backwards; }
+    .reveal section.present .vs-divider  { animation: fade-in        0.8s ease-out 0.3s backwards; }
+
+    /* 三欄卡片 — 階梯式浮起 */
+    @keyframes card-rise { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    .reveal section.present .three-col .card:nth-child(1) { animation: card-rise 0.5s ease-out 0.00s backwards; }
+    .reveal section.present .three-col .card:nth-child(2) { animation: card-rise 0.5s ease-out 0.15s backwards; }
+    .reveal section.present .three-col .card:nth-child(3) { animation: card-rise 0.5s ease-out 0.30s backwards; }
+
+    /* Demo callout — 持續脈衝光暈 */
+    @keyframes demo-pulse {
+      0%, 100% {
+        box-shadow: 0 0 0 0  rgba(244, 114, 182, 0.45),
+                    0 0 30px rgba(244, 114, 182, 0.12);
+      }
+      50% {
+        box-shadow: 0 0 0 14px rgba(244, 114, 182, 0),
+                    0 0 50px  rgba(244, 114, 182, 0.35);
+      }
+    }
+    .demo-callout { animation: demo-pulse 2.6s ease-in-out infinite; }
+
+    /* Tag 出場時彈跳 */
+    @keyframes tag-pop {
+      0%   { transform: scale(0); }
+      70%  { transform: scale(1.18); }
+      100% { transform: scale(1); }
+    }
+    .reveal section.present .tag {
+      display: inline-block;
+      animation: tag-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s backwards;
+    }
+
+    /* 模組標籤滑入 */
+    @keyframes label-slide {
+      from { transform: translateX(-10px); opacity: 0; }
+      to   { transform: translateX(0);     opacity: 0.7; }
+    }
+    .reveal section.present .module-label { animation: label-slide 0.5s ease-out; }
+
+    /* 重點字 — 持續微光 */
+    @keyframes highlight-glow {
+      0%, 100% { text-shadow: 0 0 0  rgba(125, 211, 252, 0); }
+      50%      { text-shadow: 0 0 15px rgba(125, 211, 252, 0.6); }
+    }
+    .reveal section.present .mega-quote .highlight {
+      animation: highlight-glow 2.4s ease-in-out infinite;
+    }
+
+    /* Speaker hint — 慢慢呼吸閃爍 */
+    @keyframes hint-breathe {
+      0%, 100% { opacity: 0.4; }
+      50%      { opacity: 0.8; }
+    }
+    .speaker-hint { animation: hint-breathe 3s ease-in-out infinite; }
+
+    /* Print/PDF — 全部關掉動畫 */
+    @media print {
+      .speaker-hint { display: none; }
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+</style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- ================================================================ -->
+<!-- ⊕ 使用說明（請先讀一次）                                            -->
+<!--                                                                    -->
+<!-- 1. 直接用瀏覽器（Chrome/Edge/Safari）打開本檔即可。                   -->
+<!-- 2. 鍵盤：← → 翻頁、F 全螢幕、S 講者備註、ESC 退出。                  -->
+<!-- 3. 列印 PDF：網址後加 ?print-pdf 後印成 PDF。                        -->
+<!-- 4. 想抽換內容：搜尋 "MODULE XX" 注解，每個模組標好【核心】【可抽換】 -->
+<!--    【Demo】【可選】，依場域增減即可。                                 -->
+<!-- 5. 講師備註：放在 <aside class="notes"> 標籤裡，現場按 S 鍵調出。     -->
+<!-- ================================================================ -->
+
+
+<!-- ================================================================ -->
+<!-- 🟦 TITLE SLIDE                                                    -->
+<!-- ================================================================ -->
+<section class="title-slide">
+  <h1>從 AI 焦慮<br>到 AI 複利</h1>
+  <div class="subtitle">
+    建立屬於你的第二大腦<br>
+    讓每一次學習都不再蒸發
+  </div>
+  <div class="speaker">
+    講師｜<span style="color:var(--accent)">廖梓棋</span><br>
+    <span style="opacity:0.7">期貨營業員 × 程式開發者 × 第二大腦實踐者</span>
+  </div>
+  <aside class="notes">
+    開場 30 秒：「今天我們不教你哪個 AI 最強、也不教你最厲害的 prompt。
+    我們要解一個更根本的問題：為什麼你用了那麼多 AI，自己卻沒變強？」
+  </aside>
+</section>
+
+
+<!-- ================================================================ -->
+<!-- 🟩 MODULE 00 ｜開場故事【核心｜5–8 分鐘】                          -->
+<!-- ================================================================ -->
+
+<section class="section-divider">
+  <div class="section-number">MODULE 00</div>
+  <h1>一個轉念<span class="tag tag-core">核心</span></h1>
+</section>
+
+<section>
+  <div class="module-label">MODULE 00 / 開場故事</div>
+  <h2>我以前以為 AI 的賽局是這樣⋯⋯</h2>
+  <div class="three-col" style="margin-top: 1.2em;">
+    <div class="card">
+      <div class="card-title">疑問一</div>
+      哪一個 AI 最聰明？<br>
+      <small>GPT? Claude? Gemini? Grok?</small>
+    </div>
+    <div class="card">
+      <div class="card-title">疑問二</div>
+      什麼 Prompt 最厲害？<br>
+      <small>該怎麼下指令？</small>
+    </div>
+    <div class="card">
+      <div class="card-title">疑問三</div>
+      怎麼問才得到好答案？<br>
+      <small>魔法字眼是什麼？</small>
+    </div>
+  </div>
+  <p class="lead" style="margin-top: 1em;">
+    於是我花了很多時間追工具、追技巧、追 prompt 範本⋯⋯
+  </p>
+  <aside class="notes">
+    這段是建立共鳴。每個用過 AI 的人都做過這三件事。
+    暫停一下，問現場：「你們是不是也這樣？」
+  </aside>
+</section>
+
+<section>
+  <div class="module-label">MODULE 00 / 開場故事</div>
+  <h2>直到我發現一件事⋯⋯</h2>
+  <div class="key-quote" style="margin-top: 1.2em;">
+    <span class="highlight">沒有哪個 AI 最厲害。</span><br>
+    所有 AI 都在以週為單位進化，<br>
+    今天的冠軍，下個月就過時。
+  </div>
+  <p style="margin-top: 1.5em; text-align: center; color: var(--text-dim);">
+    追工具 = 追風。風一直變，你永遠追不到。
+  </p>
+</section>
+
+<section>
+  <div class="module-label">MODULE 00 / 開場故事</div>
+  <h2>真正該問的問題是⋯⋯</h2>
+  <div class="mega-quote" style="margin-top: 1.5em;">
+    我的大腦，<br>
+    有跟著 AI 一起進化嗎？
+  </div>
+  <p style="margin-top: 1.5em; text-align: center; color: var(--text-dim); font-size: 1.05em;">
+    我跟 AI 互動的結果，到底有沒有<span class="highlight">累積下來</span>？
+  </p>
+  <aside class="notes">
+    這是整門課的「靈魂金句」。慢慢講，留 3 秒鐘讓他們消化。
+  </aside>
+</section>
+
+<section>
+  <div class="module-label">MODULE 00 / 開場故事</div>
+  <h2>於是我開始建立<br><span class="highlight">第二大腦</span></h2>
+  <ul style="margin-top: 1.2em;">
+    <li>把過去寫的交易程式，<span class="highlight">慢慢拆解進知識庫</span></li>
+    <li>把讀過的書（《遊戲化實戰》、《裸 K 線交易法》⋯⋯）整理進去</li>
+    <li>每天學到的新知，連結到舊筆記</li>
+    <li>每次跟 AI 的重要對話，<span class="highlight">不再蒸發</span></li>
+  </ul>
+  <p style="margin-top: 1.2em;">
+    今天，就是我這段路的整理。
+  </p>
+</section>
+
+
+<!-- ================================================================ -->
+<!-- 🟧 MODULE 01 ｜我是誰【可抽換｜講師依場域修改】                    -->
+<!-- ================================================================ -->
+
+<section class="section-divider">
+  <div class="section-number">MODULE 01</div>
+  <h1>我是誰</h1>
+</section>
+
+<section>
+  <div class="module-label">MODULE 01 / 講師故事</div>
+  <h2>我的本業：期貨營業員</h2>
+  <div class="two-col" style="margin-top: 1em;">
+    <div>
+      <h3>一般營業員的工作</h3>
+      <ul>
+        <li>接電話下單</li>
+        <li>整理客戶報表</li>
+        <li>回答商品問題</li>
+        <li>達成業績目標</li>
+      </ul>
+    </div>
+    <div>
+      <h3>我的差異化</h3>
+      <ul>
+        <li>會程式開發</li>
+        <li>幫客戶寫交易系統</li>
+        <li>把策略<span class="highlight">變成程式</span></li>
+        <li>客戶不只下單，<span class="highlight">還能自動化</span></li>
+      </ul>
+    </div>
+  </div>
+  <aside class="notes">
+    依場域抽換重點：
+    - 對大學生：強調「跨域能力」是怎麼長出來的
+    - 對社會人士：強調「斜槓護城河」
+    - 對進修生：強調「白天工作 + 累積專業」
+    - 對創業者：強調「個人 IP 與差異化」
+  </aside>
+</section>
+
+<section>
+  <div class="module-label">MODULE 01 / 講師故事</div>
+  <h2>但我以前一直有一個痛點⋯⋯</h2>
+  <div class="key-quote" style="font-size: 1.3em;">
+    每接一個新專案，<br>
+    幾乎都要<span class="highlight-warning">從零開始重來</span>。
+  </div>
+  <ul style="margin-top: 1.2em;">
+    <li>以前寫過的函數——記得寫過、找不到</li>
+    <li>解決過的 bug——再遇到、再 Google 一次</li>
+    <li>研究過的策略——存哪去了？</li>
+    <li>跟 AI 討論過的方案——對話視窗關掉就消失</li>
+  </ul>
+</section>
+
+<section>
+  <div class="module-label">MODULE 01 / 講師故事</div>
+  <h2>建立第二大腦之後</h2>
+  <div class="vs-grid" style="margin-top: 1em;">
+    <div class="vs-col bad">
+      <h3 style="color: var(--danger);">以前</h3>
+      <div class="big-num" style="color: var(--danger);">3 天</div>
+      <p style="text-align:center;">類似專案<br>東湊西補</p>
+    </div>
+    <div class="vs-divider">→</div>
+    <div class="vs-col good">
+      <h3 style="color: var(--success);">現在</h3>
+      <div class="big-num" style="color: var(--success);">30 分</div>
+      <p style="text-align:center;">從 vault 拉素材<br>AI 組裝第一版</p>
+    </div>
+  </div>
+  <p style="margin-top: 1.5em; text-align: center; color: var(--text-dim);">
+    時間複利、技能複利、信任複利——三者同時發生。
+  </p>
+</section>
+
+
+<!-- ================================================================ -->
+<!-- 🟨 MODULE 02 ｜聽眾的痛【可抽換｜核心痛點】                        -->
+<!-- ================================================================ -->
+
+<section class="section-divider">
+  <div class="section-number">MODULE 02</div>
+  <h1>你的痛</h1>
+</section>
+
+<section>
+  <div class="module-label">MODULE 02 / 你的痛</div>
+  <h2>請誠實回想⋯⋯</h2>
+  <ul style="margin-top: 1.2em; font-size: 1.05em;">
+    <li>上週你跟 ChatGPT/Claude 講過的話，<span class="highlight-warning">現在還找得到嗎？</span></li>
+    <li>上個月讀的那篇神文章，<span class="highlight-warning">現在還記得結論嗎？</span></li>
+    <li>學期初/年初定的目標，<span class="highlight-warning">現在進度到哪？</span></li>
+    <li>三年前做過的專案/報告，現在還能拿來用嗎？</li>
+  </ul>
+  <p style="margin-top: 1.5em; text-align: center; font-size: 1.1em;">
+    <span class="highlight">問題不是你不夠努力。</span><br>
+    <span style="color: var(--text-dim);">是你的學習沒有「容器」。</span>
+  </p>
+  <div class="speaker-hint">[互動：請學員舉手 / 留言區即時回應]</div>
+  <aside class="notes">
+    場域抽換建議：
+    - 大學生版：期末考、課堂筆記、報告、實習履歷
+    - 社會人士版：客戶資料、提案歷史、會議結論、KPI 進度
+    - 進修生版：證照進度、家庭時間、夜間學習成果
+    - 創業者版：客戶洞察、產品迭代、競品分析
+  </aside>
+</section>
+
+<section>
+  <div class="module-label">MODULE 02 / 你的痛</div>
+  <h2>更殘酷的真相</h2>
+  <div class="mega-quote" style="margin-top: 1em;">
+    AI 越強，<br>
+    <span class="highlight-warning">沒在累積的人差距越大。</span>
+  </div>
+  <p style="margin-top: 2em; text-align: center;">
+    一種人把 AI 當<span class="highlight-warning">外送員</span>——點完就吃完，<br>
+    一種人把 AI 當<span class="highlight">廚房助手</span>——<br>
+    <span style="color: var(--text-dim);">但廚房（你的知識庫）始終是你的。</span>
+  </p>
+</section>
+
+
+<!-- ================================================================ -->
+<!-- 🟦 MODULE 03 ｜核心架構【核心｜不可省略】                          -->
+<!-- ================================================================ -->
+
+<section class="section-divider">
+  <div class="section-number">MODULE 03</div>
+  <h1>第二大腦的三層架構<span class="tag tag-core">核心</span></h1>
+</section>
+
+<section>
+  <div class="module-label">MODULE 03 / 核心架構</div>
+  <h2>第二大腦不是新概念</h2>
+  <div class="three-col" style="margin-top: 1em;">
+    <div class="card">
+      <div class="card-title">1940s</div>
+      <strong>Zettelkasten</strong>
+      <small>德國社會學家盧曼<br>用卡片盒寫出 70 本書、400 篇論文</small>
+    </div>
+    <div class="card">
+      <div class="card-title">2000s</div>
+      <strong>PARA / GTD / Second Brain</strong>
+      <small>Tiago Forte 系統化<br>「打造第二大腦」方法論</small>
+    </div>
+    <div class="card">
+      <div class="card-title">2024+</div>
+      <strong>LLM-Native 第二大腦</strong>
+      <small>AI 直接讀你的 vault<br>幫你回想、串接、生成</small>
+    </div>
+  </div>
+  <p style="margin-top: 1.2em;">
+    <span class="highlight">這次的關鍵差別：</span>AI 能直接「調用」你的知識庫，<br>
+    不再只是你自己一個人整理。
+  </p>
+</section>
+
+<section>
+  <div class="module-label">MODULE 03 / 核心架構</div>
+  <h2>三層架構：載體 × 容器 × 串接</h2>
+  <div class="three-col" style="margin-top: 1.2em;">
+    <div class="card">
+      <div class="card-title">① 載體 Format</div>
+      <strong>Markdown (.md)</strong>
+      <small style="margin-top: 0.5em;">
+        純文字，30 年後還能開。<br>
+        AI 最愛吃的格式。
+      </small>
+    </div>
+    <div class="card">
+      <div class="card-title">② 容器 Tool</div>
+      <strong>Obsidian</strong>
+      <small style="margin-top: 0.5em;">
+        純本地、純 MD、<br>
+        有 graph、有 plugin 生態。
+      </small>
+    </div>
+    <div class="card">
+      <div class="card-title">③ 串接 LLM</div>
+      <strong>Claude Desktop + MCP</strong>
+      <small style="margin-top: 0.5em;">
+        AI 直接讀寫你的 vault，<br>
+        像有個記得你的同事。
+      </small>
+    </div>
+  </div>
+  <p style="margin-top: 1.2em; text-align: center; color: var(--text-dim);">
+    這三件事決定你的知識庫能不能「複利」。
+  </p>
+</section>
+
+
+<!-- ================================================================ -->
+<!-- 🟦 MODULE 04 ｜為什麼是 Markdown【核心】                           -->
+<!-- ================================================================ -->
+
+<section class="section-divider">
+  <div class="section-number">MODULE 04</div>
+  <h1>為什麼是 Markdown？<span class="tag tag-core">核心</span></h1>
+</section>
+
+<section>
+  <div class="module-label">MODULE 04 / Markdown</div>
+  <h2>檔案格式 = 你的記憶壽命</h2>
+  <div class="vs-grid">
+    <div class="vs-col bad">
+      <h3 style="color: var(--danger);">封閉格式</h3>
+      <ul style="font-size: 0.9em;">
+        <li>Word (.docx) — 鎖在微軟</li>
+        <li>Notion — 鎖在公司伺服器</li>
+        <li>PDF — 死的、不易編輯</li>
+        <li>截圖 — AI 讀得辛苦</li>
+        <li>Evernote — 老牌但封閉</li>
+      </ul>
+      <p style="font-size: 0.75em; color: var(--text-dim); margin-top: 0.8em;">
+        公司倒了？平台改規則？<br>
+        你的筆記跟著一起死。
+      </p>
+    </div>
+    <div class="vs-divider">vs</div>
+    <div class="vs-col good">
+      <h3 style="color: var(--success);">Markdown (.md)</h3>
+      <ul style="font-size: 0.9em;">
+        <li>純文字檔，<span class="highlight">永遠能開</span></li>
+        <li>跨工具、跨平台、跨 AI</li>
+        <li>LLM 原生最愛吃的格式</li>
+        <li>容易版本控制（Git）</li>
+        <li>容易全文搜尋</li>
+      </ul>
+      <p style="font-size: 0.75em; color: var(--text-dim); margin-top: 0.8em;">
+        30 年後你的孫子<br>
+        都還能打開。
+      </p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="module-label">MODULE 04 / Markdown</div>
+  <h2>Markdown 看起來像這樣</h2>
+  <pre><code data-trim data-noescape class="language-markdown">
+# 我的第一篇筆記
+
+## 重點
+- **粗體** 跟 *斜體* 都很簡單
+- 用 `-` 就是清單
+- 用 `#` 就是標題
+
+## 連結
+- 連到別篇筆記：[[Claude_Desktop_MCP_設定]]
+- 連到網頁：[Anthropic](https://anthropic.com)
+
+## 標籤
+#AI #第二大腦 #2026
+
+> 引言用大於符號開頭
+  </code></pre>
+  <p style="margin-top: 0.8em; text-align: center; color: var(--text-dim); font-size: 0.85em;">
+    就這些。學會這 5 個符號，你能用一輩子。
+  </p>
+</section>
+
+<section>
+  <div class="module-label">MODULE 04 / Markdown</div>
+  <h2>同一份 .md，到處都能開</h2>
+  <ul style="margin-top: 1em;">
+    <li>用 <span class="path">Obsidian</span> 開——有 graph、有雙向連結</li>
+    <li>用 <span class="path">VS Code</span> 開——程式碼染色、Git 版本控制</li>
+    <li>用 <span class="path">瀏覽器</span> 開——任何 Markdown previewer</li>
+    <li>用 <span class="path">記事本</span> 開——純文字也能看</li>
+    <li>丟給 <span class="path">Claude / GPT / Gemini / Grok</span> ——它們最愛吃</li>
+  </ul>
+  <p style="margin-top: 1.5em; text-align: center;" class="key-quote">
+    <span class="highlight">一次寫，永遠用，到處用。</span>
+  </p>
+</section>
+
+
+<!-- ================================================================ -->
+<!-- 🟦 MODULE 05 ｜為什麼是 Obsidian【核心】                           -->
+<!-- ================================================================ -->
+
+<section class="section-divider">
+  <div class="section-number">MODULE 05</div>
+  <h1>為什麼是 Obsidian？<span class="tag tag-core">核心</span></h1>
+</section>
+
+<section>
+  <div class="module-label">MODULE 05 / Obsidian</div>
+  <h2>市面上的選擇</h2>
+  <div class="two-col" style="margin-top: 1em;">
+    <div>
+      <h3>主流知識管理工具</h3>
+      <ul style="font-size: 0.92em;">
+        <li>Notion — 漂亮但鎖雲端</li>
+        <li>Evernote — 老牌但封閉</li>
+        <li>OneNote — 微軟綁定</li>
+        <li>Apple Notes — Apple 綁定</li>
+        <li>Roam Research — 訂閱貴</li>
+        <li>Logseq — 不錯，但生態小</li>
+      </ul>
+    </div>
+    <div>
+      <h3>為什麼我選 Obsidian</h3>
+      <ul style="font-size: 0.92em;">
+        <li><span class="highlight">本地檔案</span>，存你電腦裡</li>
+        <li>純 <span class="highlight">Markdown</span>，永不被綁</li>
+        <li>個人用<span class="highlight">免費</span></li>
+        <li>有 graph view、雙向連結</li>
+        <li>2000+ plugin 生態</li>
+        <li>離線可用、跨平台同步</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="module-label">MODULE 05 / Obsidian</div>
+  <h2>這是我自己的 Vault Graph</h2>
+  <div style="text-align: center; margin-top: 0.5em;">
+    <img src="assets/my-vault-graph.png" alt="講師實際 Obsidian Vault Graph"
+         style="max-height: 460px; max-width: 100%; width: auto; border-radius: 10px;
+                border: 1px solid var(--border); box-shadow: 0 8px 32px rgba(125, 211, 252, 0.15);">
+  </div>
+  <p style="margin-top: 0.8em; color: var(--text-dim); font-size: 0.9em;">
+    ※ 每個點是一篇筆記，每條線是筆記之間的連結。<br>
+    這不是我「整理出來」的，是<span class="highlight">寫久了自動長出來</span>的。
+  </p>
+  <div class="speaker-hint">[現場切換到實際 Obsidian 視窗示範 3–5 分鐘]</div>
+  <aside class="notes">
+    這張是整門課最重要的「證據」之一——讓聽眾看到老師真的在用。
+    現場切到 Obsidian 視窗，秀 graph view 旋轉、點開一篇 note，
+    讓他們看到雙向連結、標籤、daily note 等元素。
+  </aside>
+</section>
+
+<section>
+  <div class="module-label">MODULE 05 / Obsidian</div>
+  <h2>我 vault 裡有什麼？</h2>
+  <div class="three-col" style="margin-top: 1em;">
+    <div class="card">
+      <div class="card-title">📁 工作專案</div>
+      <small>
+        EvoCode 交易系統<br>
+        TradeApi 函式庫<br>
+        客戶 HANDOFF 記錄<br>
+        合規規則整理
+      </small>
+    </div>
+    <div class="card">
+      <div class="card-title">📚 書籍 / 課程</div>
+      <small>
+        權證交易（MOC）<br>
+        遊戲化實戰（周郁凱）<br>
+        裸 K 線交易法<br>
+        Qullamaggie 交易系統
+      </small>
+    </div>
+    <div class="card">
+      <div class="card-title">📅 日常累積</div>
+      <small>
+        Daily Note<br>
+        AI 對話歸檔<br>
+        靈感、待辦、反思<br>
+        每日 HANDOFF
+      </small>
+    </div>
+  </div>
+  <p style="margin-top: 1em; text-align: center; color: var(--text-dim); font-size: 0.9em;">
+    每個區塊都連到別的區塊。<br>
+    <span class="highlight">書讀完不是結束，是新連結的開始。</span>
+  </p>
+</section>
+
+
+<!-- ================================================================ -->
+<!-- 🟪 MODULE 06 ｜LLM 串接【核心 + 震撼 Demo】                        -->
+<!-- ================================================================ -->
+
+<section class="section-divider">
+  <div class="section-number">MODULE 06</div>
+  <h1>讓 AI 讀你的大腦<span class="tag tag-core">核心</span><span class="tag tag-demo">Live Demo</span></h1>
+</section>
+
+<section>
+  <div class="module-label">MODULE 06 / LLM × Vault</div>
+  <h2>過去：你問 AI，AI 從網路答</h2>
+  <pre><code data-trim class="language-text">
+你：「幫我寫一個移動停損的程式」
+
+AI：「好的，這是一個通用範例⋯⋯」
+
+【但 AI 不知道你的程式風格】
+【AI 不知道你過去寫過的版本】
+【AI 不知道你客戶的習慣】
+【AI 不知道公司的 API 規範】
+  </code></pre>
+  <p style="margin-top: 1em; text-align: center; color: var(--text-dim);">
+    結果：每次都得從頭講脈絡，每次都得從頭調整。
+  </p>
+</section>
+
+<section>
+  <div class="module-label">MODULE 06 / LLM × Vault</div>
+  <h2>現在：AI 讀你的 vault，再答你</h2>
+  <pre><code data-trim class="language-text">
+你：「幫我寫一個移動停損的程式」
+
+AI（透過 MCP 讀取 vault）：
+
+「看了你 EvoCode_風控計算_SL_TP_Lot 的寫法，
+ 你習慣用 ATR 倍數來算停損距離。
+
+ 也看了 HANDOFF_2026-05-13 上次的討論，
+ 這次我延續那個思路：⋯⋯」
+  </code></pre>
+  <p style="margin-top: 1em; text-align: center;">
+    <span class="highlight">AI 變成「認識你的同事」</span>，不是「網路客服」。
+  </p>
+</section>
+
+<section>
+  <div class="module-label">MODULE 06 / LLM × Vault</div>
+  <h2>實現方式：Claude Desktop + MCP</h2>
+  <div class="card" style="margin-top: 0.8em;">
+    <div class="card-title">什麼是 MCP？</div>
+    <p style="font-size: 0.92em;">
+      <strong>Model Context Protocol</strong> — Anthropic 推出的開放協議，<br>
+      讓 Claude 能直接「連到」你電腦上的檔案、資料夾、軟體、資料庫。
+    </p>
+  </div>
+  <div class="three-col" style="margin-top: 1.2em;">
+    <div class="card">
+      <div class="card-title">Step 1</div>
+      <small>下載 Claude Desktop<br>登入 Anthropic 帳號</small>
+    </div>
+    <div class="card">
+      <div class="card-title">Step 2</div>
+      <small>安裝 Obsidian<br>建立你的 vault</small>
+    </div>
+    <div class="card">
+      <div class="card-title">Step 3</div>
+      <small>設定 MCP filesystem<br>指向 vault 資料夾</small>
+    </div>
+  </div>
+  <p style="margin-top: 1em; text-align: center; color: var(--text-dim); font-size: 0.88em;">
+    設定一次，永遠連通。詳細設定步驟在課後 handout。
+  </p>
+</section>
+
+<section>
+  <div class="module-label">MODULE 06 / Live Demo</div>
+  <div class="demo-callout">
+    <div class="demo-label">▶ ▶ ▶ LIVE DEMO ◀ ◀ ◀</div>
+    <h2 style="margin-bottom: 1em;">現場示範</h2>
+    <ul style="text-align: left; max-width: 720px; margin: 0 auto;">
+      <li>① 打開 Claude Desktop，連到我的 vault</li>
+      <li>② 問：「整理我今天的 daily note，連回相關舊筆記」</li>
+      <li>③ Claude 自動讀 vault → 找關聯 → 寫摘要</li>
+      <li>④ 直接寫回 vault 對應位置，雙向連結自動建立</li>
+    </ul>
+    <p style="color: var(--text-dim); margin-top: 1em;">
+      預計 5–8 分鐘示範。
+    </p>
+  </div>
+  <div class="speaker-hint">[Demo 前確認 ✓ Claude Desktop 已登入 ✓ MCP 連通 ✓ Vault 開啟 ✓ 網路備案]</div>
+  <aside class="notes">
+    Demo 是整堂課的決勝點。彩排至少三次。
+    準備一份「已知會成功」的 prompt，現場照念。
+    如果現場網路斷線——立刻切換到「錄影 demo」（記得事先錄好備案）。
+  </aside>
+</section>
+
+
+<!-- ================================================================ -->
+<!-- 🟩 MODULE 07 ｜真實用法【核心 + 例子可抽換】                       -->
+<!-- ================================================================ -->
+
+<section class="section-divider">
+  <div class="section-number">MODULE 07</div>
+  <h1>我的真實用法<span class="tag tag-core">核心</span></h1>
+</section>
+
+<section>
+  <div class="module-label">MODULE 07 / 用法 #1</div>
+  <h2>用法一：拆解過去寫過的程式</h2>
+  <div class="two-col" style="margin-top: 1em;">
+    <div>
+      <h3>做法</h3>
+      <ul style="font-size: 0.92em;">
+        <li>把舊程式 import 進 vault</li>
+        <li>請 Claude 拆出每個函數的功能</li>
+        <li>標籤分類：<span class="path">#訊號 #風控 #繪圖</span></li>
+        <li>建立 MOC（Map of Content）</li>
+      </ul>
+    </div>
+    <div>
+      <h3>累積效果</h3>
+      <ul style="font-size: 0.92em;">
+        <li>下次新專案，<span class="highlight">直接從 vault 找模組</span></li>
+        <li>AI 知道我的程式風格</li>
+        <li>客戶問「能不能加 XX 功能」<br>→ 找出舊版本 → 改寫</li>
+        <li>3 天 → 30 分鐘</li>
+      </ul>
+    </div>
+  </div>
+  <aside class="notes">
+    場域對照用法一：
+    - 學生：「拆解過去寫過的報告」
+    - 社會人士：「拆解過去做過的提案」
+    - 創作者：「拆解過去寫過的文章」
+  </aside>
+</section>
+
+<section>
+  <div class="module-label">MODULE 07 / 用法 #2</div>
+  <h2>用法二：讀書不再消失</h2>
+  <div class="two-col" style="margin-top: 1em;">
+    <div>
+      <h3>做法</h3>
+      <ul style="font-size: 0.92em;">
+        <li>每本書建一個 MOC</li>
+        <li>章節重點分篇寫成獨立 note</li>
+        <li>連結到「我能用的場景」</li>
+        <li>例：《遊戲化實戰》→ 八角框架 → 套用在客戶服務</li>
+      </ul>
+    </div>
+    <div>
+      <h3>累積效果</h3>
+      <ul style="font-size: 0.92em;">
+        <li>讀過的書<span class="highlight">變成你的</span>，不是書架上的</li>
+        <li>寫文章時 Claude 自動找到相關片段</li>
+        <li>不同書的概念開始<span class="highlight">互相連結</span></li>
+        <li>長出你自己的觀點</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="module-label">MODULE 07 / 用法 #3</div>
+  <h2>用法三：每日累積（Daily Note）</h2>
+  <div class="two-col" style="margin-top: 1em;">
+    <div>
+      <h3>做法</h3>
+      <ul style="font-size: 0.92em;">
+        <li>每天開一篇 daily note</li>
+        <li>記三件事：學到 / 做了 / 想到</li>
+        <li>關鍵句加 <span class="path">[[雙向連結]]</span></li>
+        <li>重要 AI 對話 → 複製進 vault</li>
+      </ul>
+    </div>
+    <div>
+      <h3>累積效果</h3>
+      <ul style="font-size: 0.92em;">
+        <li>一年後有 365 個錨點</li>
+        <li>每個錨點都連到 vault 其他地方</li>
+        <li>你會「看見自己的成長」</li>
+        <li>履歷、自傳、年終，<span class="highlight">素材都在裡面</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+
+<!-- ================================================================ -->
+<!-- 🟫 MODULE 08 ｜HANDOFF 模式【可選｜進階心法】                      -->
+<!-- ================================================================ -->
+
+<section>
+  <div class="module-label">MODULE 08 / 進階：HANDOFF 模式<span class="tag tag-opt">可選</span></div>
+  <h2>進階心法：HANDOFF Note</h2>
+  <p>每次跟 AI 的長對話結束時，請 AI 寫一份「交接筆記」存進 vault：</p>
+  <pre><code data-trim class="language-markdown">
+# HANDOFF_2026-05-13_1800_evocode-api-lint
+
+## 我們討論了什麼
+討論 EvoCode API 介面命名一致性問題
+
+## 結論
+- 統一用 snake_case
+- ToolBelt 模組需要重構
+
+## 下次接著做
+- 重構 TradeApi_CustomColumns
+- 驗證向後相容性
+
+## 相關連結
+- [[EvoCode_TradeApi]]
+- [[TradeApi_History]]
+  </code></pre>
+  <p style="text-align: center; color: var(--text-dim); font-size: 0.9em;">
+    下次任何 AI（Claude / GPT / Gemini）都能<span class="highlight">秒接得上</span>。<br>
+    再也不會「上次討論到哪了？」。
+  </p>
+</section>
+
+
+<!-- ================================================================ -->
+<!-- 🟦 MODULE 09 ｜開始行動【核心】                                    -->
+<!-- ================================================================ -->
+
+<section class="section-divider">
+  <div class="section-number">MODULE 09</div>
+  <h1>今天就開始<span class="tag tag-core">核心</span></h1>
+</section>
+
+<section>
+  <div class="module-label">MODULE 09 / 行動</div>
+  <h2>第一週：把工具裝起來</h2>
+  <ol style="margin-top: 1.2em;">
+    <li>下載 <span class="path">Obsidian</span>（obsidian.md，免費）</li>
+    <li>建立第一個 vault：取一個你會記得的名字</li>
+    <li>建四個資料夾：<span class="path">00_Inbox / 10_Projects / 20_Areas / 30_Resources</span></li>
+    <li>寫第一篇 daily note：今天學到的一件事</li>
+  </ol>
+  <p style="margin-top: 1.5em; text-align: center; color: var(--text-dim);">
+    ⏱ 預計 30 分鐘 — 今晚就能做完
+  </p>
+</section>
+
+<section>
+  <div class="module-label">MODULE 09 / 行動</div>
+  <h2>第一個月：建立習慣</h2>
+  <ul style="margin-top: 1.2em;">
+    <li>每天打開 Obsidian，寫一行 daily note</li>
+    <li>每次跟 AI 對話完，把<span class="highlight">有用的</span>複製進去</li>
+    <li>每週選一份檔案/PDF/文章，整理成 .md</li>
+    <li>裝兩個 plugin：<span class="path">Calendar</span>、<span class="path">Templater</span></li>
+  </ul>
+  <p style="margin-top: 1.5em; text-align: center; color: var(--text-dim);">
+    🎯 目標：連續 30 天不斷
+  </p>
+</section>
+
+<section>
+  <div class="module-label">MODULE 09 / 行動</div>
+  <h2>第三個月：感受複利</h2>
+  <ul style="margin-top: 1.2em;">
+    <li>你會體驗第一次「<span class="highlight">啊這個我寫過</span>」</li>
+    <li>你的 graph 開始長出意外的連結</li>
+    <li>跟 AI 對話時，<span class="highlight">你給的脈絡會更清楚</span></li>
+    <li>進階：嘗試 Claude Desktop + MCP 串接 vault</li>
+  </ul>
+  <p style="margin-top: 1.5em; text-align: center;" class="key-quote">
+    這時候，你已經<span class="highlight">回不去了</span>。
+  </p>
+</section>
+
+
+<!-- ================================================================ -->
+<!-- 🟥 MODULE 10 ｜身分選擇【核心｜收尾】                              -->
+<!-- ================================================================ -->
+
+<section class="section-divider">
+  <div class="section-number">MODULE 10</div>
+  <h1>身分選擇<span class="tag tag-core">核心</span></h1>
+</section>
+
+<section>
+  <div class="module-label">MODULE 10 / 收尾</div>
+  <h2>五年後的你，會是哪一種？</h2>
+  <div class="vs-grid" style="margin-top: 1em;">
+    <div class="vs-col bad">
+      <h3 style="color: var(--danger);">A 型</h3>
+      <ul style="font-size: 0.9em;">
+        <li>每天用 AI</li>
+        <li>但沒有累積</li>
+        <li>跟剛畢業時差不多</li>
+        <li>跟 AI <span class="highlight-danger">競爭</span>工作機會</li>
+      </ul>
+    </div>
+    <div class="vs-divider">vs</div>
+    <div class="vs-col good">
+      <h3 style="color: var(--success);">B 型</h3>
+      <ul style="font-size: 0.9em;">
+        <li>每天用 AI</li>
+        <li>每次對話都<span class="highlight">複利</span></li>
+        <li>vault 有 1000+ 篇筆記</li>
+        <li>AI 是你的<span class="highlight">放大器</span></li>
+      </ul>
+    </div>
+  </div>
+  <p style="margin-top: 1.5em; text-align: center;" class="key-quote">
+    差距：<span class="highlight">不在天份，在系統。</span>
+  </p>
+</section>
+
+<section>
+  <div class="module-label">MODULE 10 / 收尾</div>
+  <div class="mega-quote">
+    AI 不會取代你。<br>
+    但 AI 會取代<br>
+    <span style="color: var(--warning);">不會用 AI 累積自己的人</span>。
+  </div>
+</section>
+
+<section>
+  <div class="module-label">MODULE 10 / 收尾</div>
+  <h2>今晚的功課</h2>
+  <ol style="margin-top: 1.2em; font-size: 1.1em;">
+    <li>下載 Obsidian</li>
+    <li>建立 vault，命名你記得</li>
+    <li>寫第一篇 daily note</li>
+    <li>記下一句：<span class="highlight">「今天我學到了______」</span></li>
+  </ol>
+  <p style="margin-top: 2em; text-align: center;" class="key-quote">
+    這一篇，可能是你五年後最重要的起點。
+  </p>
+</section>
+
+<section class="title-slide">
+  <h1 style="font-size: 2.5em;">謝謝</h1>
+  <div class="subtitle">
+    願你的每一次學習，<br>
+    都不再蒸發。
+  </div>
+  <div class="speaker" style="border-top: 1px solid var(--border); padding-top: 1.2em;">
+    <div style="margin-bottom: 1em; color: var(--text);">
+      有任何問題、想交流第二大腦實踐 —— 歡迎加我 LINE
+    </div>
+    <div style="display: flex; align-items: center; justify-content: center; gap: 40px; flex-wrap: wrap;">
+      <div style="text-align: left;">
+        <div style="font-size: 0.85em; color: var(--text-dim); letter-spacing: 0.1em; margin-bottom: 0.3em;">LINE ID</div>
+        <div style="font-family: 'JetBrains Mono', monospace; color: var(--accent); font-size: 1.6em; font-weight: 700; letter-spacing: 0.05em;">csdm67931</div>
+        <div style="font-size: 0.75em; color: var(--text-dim); margin-top: 0.6em;">講師｜廖梓棋</div>
+      </div>
+      <div>
+        <img src="https://qr-official.line.me/gs/M_698mljhz_BW.png?oat_content=qr"
+             alt="LINE QR Code"
+             style="width: 150px; height: 150px; border-radius: 12px; background: white; padding: 8px; box-shadow: 0 8px 32px rgba(125, 211, 252, 0.25);">
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    結尾留 3 分鐘 Q&amp;A。
+    如果有人問「Notion 不行嗎？」——回答：「行，但你會被 Notion 鎖住。」
+    如果有人問「我什麼都不會程式怎麼辦？」——回答：「Obsidian 完全不用寫程式。我們今天看的 demo 那部分（MCP）是進階的，前面 90% 內容你都可以做。」
+  </aside>
+</section>
+
+
+<!-- ================================================================ -->
+<!-- ⊕ MODULE BANK ｜可選備用模組（依場域選用，預設不顯示）              -->
+<!--                                                                    -->
+<!-- 想啟用某個備用模組？把它從這個註解區拉出來貼到正式 slide 區即可。   -->
+<!-- ================================================================ -->
+
+<!--
+
+【BANK-01｜大學生專屬版本】可放在 MODULE 02 後面，強化「四年後」對比
+<section>
+  <div class="module-label">MODULE 02+ / 大學生延伸</div>
+  <h2>大一到畢業，1460 天</h2>
+  <p>每天 5 分鐘寫筆記 × 1460 天 = <span class="highlight">122 小時</span>的累積</p>
+  <p>到時候你有的不只是學位，<span class="highlight">還有一個會說話的知識庫</span>。</p>
+</section>
+
+
+【BANK-02｜社會人士版本】可放在 MODULE 02 後面，強化「職涯護城河」
+<section>
+  <div class="module-label">MODULE 02+ / 社會人士延伸</div>
+  <h2>你的知識庫，就是你的離職保險</h2>
+  <p>公司會換、職位會變，但你的 vault 跟著你。</p>
+  <p>每一次跳槽，你帶走的不是公司的東西，<span class="highlight">是你自己累積的能力。</span></p>
+</section>
+
+
+【BANK-03｜進修生/空大版本】可放在 MODULE 02 後面，強化「時間有限」
+<section>
+  <div class="module-label">MODULE 02+ / 進修生延伸</div>
+  <h2>你最缺的不是努力，是時間複利</h2>
+  <p>白天工作、晚上學習、家庭照顧——時間被切得很碎。</p>
+  <p>第二大腦讓你「<span class="highlight">不浪費每一片碎片</span>」，每一次學習都成為下一次的基礎。</p>
+</section>
+
+
+【BANK-04｜創業者/自由工作者版本】
+<section>
+  <div class="module-label">MODULE 02+ / 創業者延伸</div>
+  <h2>個人 IP = 你能不能被找到</h2>
+  <p>客戶找你，是因為他知道「找你就對了」。</p>
+  <p>第二大腦讓你的觀點、案例、方法論長期沉澱，<span class="highlight">變成可被搜尋的個人品牌資產</span>。</p>
+</section>
+
+
+【BANK-05｜進階技術版本】可放在 MODULE 08 後面
+<section>
+  <div class="module-label">MODULE 08+ / 進階：Obsidian Plugin 推薦</div>
+  <h2>讓 vault 更強的 5 個 Plugin</h2>
+  <ul>
+    <li><span class="path">Dataview</span> — 把 vault 變成資料庫</li>
+    <li><span class="path">Templater</span> — 自動化模板</li>
+    <li><span class="path">Smart Connections</span> — 用 AI 找相關筆記</li>
+    <li><span class="path">Excalidraw</span> — 手繪圖筆記</li>
+    <li><span class="path">Periodic Notes</span> — 自動週/月/年回顧</li>
+  </ul>
+</section>
+
+
+【BANK-06｜AI 倫理 / 合規版本】（特別適合金融、法律、醫療場域）
+<section>
+  <div class="module-label">MODULE 06+ / 合規與隱私</div>
+  <h2>把 AI 接進 vault，安全嗎？</h2>
+  <ul>
+    <li>Obsidian vault 純本地——資料不上雲</li>
+    <li>MCP 是<span class="highlight">本機協議</span>，AI 透過你的 Claude Desktop 讀取</li>
+    <li>敏感資料可設定排除資料夾（exclude folder）</li>
+    <li>客戶資料、合規內容請另設加密 vault</li>
+  </ul>
+</section>
+
+-->
+
+
+</div>
+</div>
+
+<!-- Reveal.js scripts -->
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/markdown/markdown.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+
+<script>
+  Reveal.initialize({
+    hash: true,
+    slideNumber: 'c/t',
+    transition: 'slide',
+    backgroundTransition: 'fade',
+    controls: true,
+    progress: true,
+    center: false,
+    width: 1280,
+    height: 800,
+    margin: 0.04,
+    minScale: 0.2,
+    maxScale: 2.0,
+    plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+  });
+</script>
+</body>
+</html>

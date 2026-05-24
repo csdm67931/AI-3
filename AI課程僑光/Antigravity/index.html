@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <title>從 AI 焦慮到 AI 複利：建立你的第二大腦</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <!-- Reveal.js CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reset.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/theme/black.css">
+  
+  <!-- Highlight.js theme -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/plugin/highlight/monokai.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* Custom Theme overrides */
+    :root {
+      --bg: #0a0a0f;
+      --accent: #7dd3fc;
+      --secondary: #f472b6;
+      --warn: #fbbf24;
+      --success: #4ade80;
+      --danger: #f87171;
+      --card-bg: #1c1c28;
+      --text-dim: #94a3b8;
+    }
+
+    body, .reveal {
+      background-color: var(--bg);
+      font-family: 'Noto Sans TC', sans-serif;
+    }
+    
+    .reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+      font-family: 'Noto Sans TC', sans-serif;
+      text-transform: none;
+      font-weight: 700;
+    }
+
+    code, .mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Gradient Title Animation */
+    @keyframes gradient-shift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    .gradient-text {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--secondary) 100%);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradient-shift 6s ease infinite;
+      font-weight: 900;
+    }
+
+    /* Module Label */
+    .module-label {
+      position: absolute;
+      top: 30px;
+      left: 30px;
+      font-size: 0.5em;
+      color: var(--accent);
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.1em;
+      opacity: 0.8;
+      text-align: left;
+    }
+
+    /* Section Divider */
+    .section-divider {
+      text-align: left;
+    }
+    .section-divider h2 {
+      font-size: 2.5em;
+      margin-bottom: 0.5em;
+    }
+    .section-divider .subtitle {
+      color: var(--accent);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1em;
+      letter-spacing: 0.2em;
+    }
+
+    /* Big Numbers */
+    .big-num {
+      font-size: 5em;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent);
+      font-weight: 700;
+      line-height: 1;
+      margin: 0;
+      display: inline-block;
+    }
+    .big-num-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+      margin-top: 50px;
+    }
+    .big-num-item {
+      text-align: center;
+      background: var(--card-bg);
+      padding: 30px 50px;
+      border-radius: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Core Quote */
+    .core-quote {
+      font-size: 2em;
+      font-weight: 900;
+      line-height: 1.4;
+      background: var(--card-bg);
+      padding: 40px;
+      border-radius: 20px;
+      border: 2px solid var(--accent);
+      text-align: center;
+      margin: 40px 0;
+    }
+
+    /* VS Grid */
+    .vs-grid {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 30px;
+      align-items: stretch;
+      margin-top: 40px;
+    }
+    .vs-card {
+      background: var(--card-bg);
+      padding: 30px;
+      border-radius: 15px;
+      text-align: left;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .vs-card.bad {
+      border-top: 5px solid var(--danger);
+    }
+    .vs-card.good {
+      border-top: 5px solid var(--success);
+    }
+    .vs-vs {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2em;
+      font-weight: 900;
+      color: var(--text-dim);
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .vs-card h3 {
+      font-size: 1.2em;
+      margin-bottom: 1em;
+      color: var(--text-dim);
+    }
+    .vs-card.bad h3 { color: var(--danger); }
+    .vs-card.good h3 { color: var(--success); }
+    .vs-card ul {
+      margin-left: 20px;
+      font-size: 0.9em;
+    }
+
+    /* 3-Column Card Grid */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      margin-top: 40px;
+    }
+    .grid-card {
+      background: var(--card-bg);
+      padding: 30px;
+      border-radius: 15px;
+      text-align: left;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .grid-card h3 {
+      font-size: 1.2em;
+      color: var(--accent);
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Live Demo Callout */
+    @keyframes pulse-glow {
+      0% { box-shadow: 0 0 0 0 rgba(244, 114, 182, 0.4); }
+      70% { box-shadow: 0 0 0 20px rgba(244, 114, 182, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(244, 114, 182, 0); }
+    }
+    .demo-callout {
+      background: rgba(244, 114, 182, 0.1);
+      border: 2px solid var(--secondary);
+      border-radius: 15px;
+      padding: 40px;
+      text-align: left;
+      animation: pulse-glow 2s infinite;
+      margin-top: 30px;
+    }
+    .demo-callout h3 {
+      color: var(--secondary);
+      font-family: 'JetBrains Mono', monospace;
+      margin-top: 0;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    /* General Utilities */
+    .text-left { text-align: left; }
+    .text-accent { color: var(--accent); }
+    .text-dim { color: var(--text-dim); }
+    .text-success { color: var(--success); }
+    .text-danger { color: var(--danger); }
+    .text-secondary { color: var(--secondary); }
+    
+    .slide-in-left { animation: slideInLeft 0.8s ease forwards; opacity: 0; transform: translateX(-50px); }
+    .slide-in-right { animation: slideInRight 0.8s ease forwards; opacity: 0; transform: translateX(50px); }
+    .fade-up { animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; transform: translateY(30px); }
+    .bounce-in { animation: bounceIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; opacity: 0; transform: scale(0.5); }
+    
+    .delay-1 { animation-delay: 0.15s; }
+    .delay-2 { animation-delay: 0.3s; }
+    .delay-3 { animation-delay: 0.45s; }
+
+    @keyframes slideInLeft { to { opacity: 1; transform: translateX(0); } }
+    @keyframes slideInRight { to { opacity: 1; transform: translateX(0); } }
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+    @keyframes bounceIn { to { opacity: 1; transform: scale(1); } }
+
+    /* Disable animations for printing */
+    @media print {
+      * {
+        animation: none !important;
+        -webkit-animation: none !important;
+        transform: none !important;
+        opacity: 1 !important;
+      }
+      .gradient-text {
+        -webkit-text-fill-color: black;
+      }
+    }
+    
+    /* Code block styling */
+    .reveal pre {
+      background: var(--card-bg);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      box-shadow: none;
+    }
+    
+    /* Highlight styles */
+    .highlight-text {
+      background: rgba(125, 211, 252, 0.2);
+      padding: 0 8px;
+      border-radius: 4px;
+      color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- ========================================== -->
+      <!-- MODULE 00: 一個轉念 -->
+      <!-- ========================================== -->
+      <section>
+        <div class="module-label">MODULE 00 / 開場故事</div>
+        <h1 class="gradient-text fade-up">從 AI 焦慮到 AI 複利</h1>
+        <h3 class="text-dim fade-up delay-1">建立你的第二大腦</h3>
+        <p class="fade-up delay-2" style="margin-top: 50px;">
+          廖梓棋<br>
+          <span class="text-dim" style="font-size: 0.7em;">期貨營業員 × 程式開發者</span>
+        </p>
+      </section>
+
+      <section>
+        <div class="module-label">MODULE 00 / 一個轉念</div>
+        <h2 class="text-left">你是不是也曾這樣想過？</h2>
+        <div class="card-grid">
+          <div class="grid-card fade-up delay-1">
+            <h3>1</h3>
+            <p>「哪個 AI 最聰明？ChatGPT 還是 Claude？」</p>
+          </div>
+          <div class="grid-card fade-up delay-2">
+            <h3>2</h3>
+            <p>「哪裡可以買到最強的 Prompt 大全？」</p>
+          </div>
+          <div class="grid-card fade-up delay-3">
+            <h3>3</h3>
+            <p>「到底要怎麼問，AI 才會給我好答案？」</p>
+          </div>
+        </div>
+        <aside class="notes">
+          講師：大家一開始接觸 AI 都是這樣，追著工具跑。但我後來發現這是一個迷思。
+        </aside>
+      </section>
+
+      <section>
+        <div class="module-label">MODULE 00 / 一個轉念</div>
+        <h2 class="gradient-text">「沒有哪個 AI 最厲害」</h2>
+        <p class="text-left fade-up delay-1" style="font-size: 1.2em; margin-top: 30px;">
+          所有 AI 都在以<span class="highlight-text">週</span>為單位進化。<br>
+          今天的冠軍，下個月就過時。
+        </p>
+        <div class="core-quote fade-up delay-2">
+          真正的問題是：<br>
+          「我的大腦有跟著 AI 一起進化嗎？」
+        </div>
+        <aside class="notes">
+          講師：於是我開始建第二大腦。因為我發現，AI 不會取代你... (下一頁)
+        </aside>
+      </section>
+
+      <section>
+        <div class="module-label">MODULE 00 / 核心主軸</div>
+        <div class="core-quote fade-up" style="font-size: 2.2em; padding: 60px;">
+          「AI 不會取代你，<br>
+          <span class="text-accent">但 AI 會取代不會用 AI 累積自己的人。</span>」
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- MODULE 01: 我是誰 -->
+      <!-- ========================================== -->
+      <section>
+        <div class="module-label">MODULE 01 / 講師背景</div>
+        <h2 class="text-left">我是誰？</h2>
+        <div class="vs-grid">
+          <div class="vs-card fade-up delay-1 slide-in-left">
+            <h3 class="text-dim">一般期貨營業員</h3>
+            <ul>
+              <li>接電話</li>
+              <li>處理下單</li>
+              <li>傳送研究報告</li>
+            </ul>
+          </div>
+          <div class="vs-vs fade-up delay-2">VS</div>
+          <div class="vs-card good fade-up delay-3 slide-in-right">
+            <h3>我 (廖梓棋)</h3>
+            <ul>
+              <li>幫客戶寫交易系統</li>
+              <li>開發自動化工具</li>
+              <li>把策略變成程式碼</li>
+            </ul>
+          </div>
+        </div>
+        <aside class="notes">
+          講師：為什麼我要建第二大腦？因為以前每個新專案都要從零開始，很痛苦。
+        </aside>
+      </section>
+
+      <section>
+        <div class="module-label">MODULE 01 / 講師痛點</div>
+        <h2 class="text-left">建立第二大腦的改變</h2>
+        <p class="text-left fade-up">開發一個新交易策略雛型的時間：</p>
+        <div class="big-num-container">
+          <div class="big-num-item fade-up delay-1">
+            <div class="text-dim" style="font-size:0.3em; margin-bottom:10px;">以前 (從零開始)</div>
+            <div class="big-num text-dim">3<span style="font-size: 0.4em;"> 天</span></div>
+          </div>
+          <div class="big-num-item fade-up delay-2" style="border-color: var(--accent);">
+            <div class="text-accent" style="font-size:0.3em; margin-bottom:10px;">現在 (有知識庫)</div>
+            <div class="big-num bounce-in delay-3">30<span style="font-size: 0.4em;"> 分鐘</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- MODULE 02: 你的痛 -->
+      <!-- ========================================== -->
+      <section class="section-divider">
+        <div class="subtitle fade-up">MODULE 02</div>
+        <h2 class="gradient-text fade-up delay-1">你的痛：為什麼你學不下來？</h2>
+      </section>
+
+      <section>
+        <div class="module-label">MODULE 02 / 你的痛</div>
+        <ul style="font-size: 1.5em; line-height: 2;">
+          <li class="fade-up delay-1">你上週跟 AI 討論出很棒的點子，現在還找得到嗎？</li>
+          <li class="fade-up delay-2">你看完的 YouTube 教學，過兩週還記得細節嗎？</li>
+          <li class="fade-up delay-3">你是不是覺得每天都在接收新知，但自己卻沒有變強？</li>
+        </ul>
+      </section>
+
+      <section>
+        <div class="module-label">MODULE 02 / 診斷</div>
+        <div class="core-quote fade-up">
+          「問題不是你不夠努力，<br>
+          是你的學習沒有『容器』。」
+        </div>
+        <p class="text-dim fade-up delay-1">
+          把 AI 當外送員（用完就丟） VS <span class="text-accent">當廚房助手（累積食譜）</span>
+        </p>
+        <aside class="notes">
+          講師：AI 是頂級主廚，但你冰箱要有食材。沒有素材庫，AI 只能煮泡麵。
+        </aside>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- MODULE 03: 第二大腦三層架構 -->
+      <!-- ========================================== -->
+      <section class="section-divider">
+        <div class="subtitle fade-up">MODULE 03</div>
+        <h2 class="gradient-text fade-up delay-1">解法：第二大腦三層架構</h2>
+      </section>
+
+      <section>
+        <div class="module-label">MODULE 03 / 三層架構</div>
+        <p class="text-left fade-up">從卡片盒筆記 (Zettelkasten) 到 2024 AI 原生世代：</p>
+        
+        <div class="card-grid" style="margin-top: 30px;">
+          <div class="grid-card fade-up delay-1" style="border-top: 3px solid #94a3b8; transform: translateY(0);">
+            <h3 style="color:#94a3b8">① 載體 (Format)</h3>
+            <p><strong>Markdown</strong></p>
+            <p class="text-dim" style="font-size:0.8em">純文字、可攜帶、AI 最好讀的格式。</p>
+          </div>
+          <div class="grid-card fade-up delay-2" style="border-top: 3px solid var(--accent); transform: translateY(-15px);">
+            <h3 style="color:var(--accent)">② 容器 (Container)</h3>
+            <p><strong>Obsidian</strong></p>
+            <p class="text-dim" style="font-size:0.8em">本地檔案、雙向連結、強大外掛生態。</p>
+          </div>
+          <div class="grid-card fade-up delay-3" style="border-top: 3px solid var(--secondary); transform: translateY(-30px);">
+            <h3 style="color:var(--secondary)">③ 串接 (Connect)</h3>
+            <p><strong>Claude + MCP</strong></p>
+            <p class="text-dim" style="font-size:0.8em">讓 AI 直接讀取、分析、寫入你的知識庫。</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- MODULE 04: 為什麼是 Markdown -->
+      <!-- ========================================== -->
+      <section>
+        <div class="module-label">MODULE 04 / 載體</div>
+        <h2 class="text-left">為什麼是 Markdown？</h2>
+        
+        <div class="vs-grid">
+          <div class="vs-card bad fade-up delay-1 slide-in-left">
+            <h3>封閉格式</h3>
+            <ul>
+              <li>Word (.docx)</li>
+              <li>Notion (雲端)</li>
+              <li>PDF / 圖片截圖</li>
+            </ul>
+            <p class="text-dim" style="font-size: 0.8em; margin-top:20px;">AI 難以直接解析，或容易被平台綁架。</p>
+          </div>
+          <div class="vs-vs fade-up delay-2">VS</div>
+          <div class="vs-card good fade-up delay-3 slide-in-right">
+            <h3>Markdown (.md)</h3>
+            <ul>
+              <li>純文字，30 年後還能開</li>
+              <li>語法極簡 (5個符號就夠)</li>
+              <li><strong>AI 原生最愛的格式</strong></li>
+            </ul>
+            <p class="text-dim" style="font-size: 0.8em; margin-top:20px;">跨平台：Obsidian / VS Code / 記事本 都能開。</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- MODULE 05: 為什麼是 Obsidian -->
+      <!-- ========================================== -->
+      <section>
+        <div class="module-label">MODULE 05 / 容器</div>
+        <h2 class="text-left">為什麼是 Obsidian？</h2>
+        <ul class="text-left fade-up delay-1" style="margin-bottom: 30px;">
+          <li><span class="text-danger">Notion / Evernote：</span> 雲端封閉、資料不完全屬於你。</li>
+          <li><span class="text-success">Obsidian：</span> 本地 .md 檔案、免費、視覺化 Graph、外掛生態系。</li>
+        </ul>
+        
+        <div class="fade-up delay-2" style="background: var(--card-bg); padding: 10px; border-radius: 10px;">
+          <img src="assets/my-vault-graph.png" alt="講師的 Obsidian Vault Graph" style="max-height: 400px; border-radius: 5px; border: 1px solid rgba(255,255,255,0.1);" onerror="this.src='https://via.placeholder.com/800x400/1c1c28/7dd3fc?text=Instructor+Vault+Graph+Screenshot'">
+          <p class="text-dim" style="font-size: 0.6em; margin-top: 5px;">講師真實 Vault 截圖 (工作專案 / 書籍課程 / 日常累積)</p>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- MODULE 06: LLM × Vault：Claude Desktop + MCP -->
+      <!-- ========================================== -->
+      <section class="section-divider">
+        <div class="subtitle fade-up">MODULE 06</div>
+        <h2 class="gradient-text fade-up delay-1">LLM × Vault<br>讓 AI 讀懂你的大腦</h2>
+      </section>
+
+      <section>
+        <div class="module-label">MODULE 06 / 串接原理</div>
+        <div class="vs-grid">
+          <div class="vs-card bad fade-up delay-1 slide-in-left">
+            <h3>過去的 AI 對話</h3>
+            <p>AI 從「網路上」找通用答案給你。</p>
+            <p class="text-dim">"請幫我寫一個交易策略..."<br>➜ 給你標準但無聊的範例。</p>
+          </div>
+          <div class="vs-vs fade-up delay-2">VS</div>
+          <div class="vs-card good fade-up delay-3 slide-in-right">
+            <h3>MCP 串接後的 AI</h3>
+            <p>AI 從「你的知識庫」找脈絡給你。</p>
+            <p class="text-dim">"請依據我過去寫的 EvoCode 習慣，幫我寫策略..."<br>➜ 給你完全客製化的專屬程式碼。</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="module-label">MODULE 06 / LIVE DEMO</div>
+        <h2 class="text-left">Claude Desktop + MCP</h2>
+        <ol class="text-left fade-up delay-1">
+          <li>安裝 Claude Desktop (支援 MCP)</li>
+          <li>建立 Obsidian Vault</li>
+          <li>設定 MCP 伺服器 (讓 Claude 能讀寫 Vault)</li>
+        </ol>
+
+        <div class="demo-callout fade-up delay-2">
+          <h3><span class="mono">LIVE DEMO 🔴</span> 讓 AI 認識我</h3>
+          <ul style="color: white; line-height: 1.8;">
+            <li>1. Claude 連接 Vault 狀態確認</li>
+            <li>2. 問問題：「請根據我的筆記，總結我最近在研究什麼？」</li>
+            <li>3. AI 讀取檔案並生成整理</li>
+            <li>4. 指示 AI 將結果寫回 Vault 的新檔案中</li>
+          </ul>
+        </div>
+        <aside class="notes">
+          講師：(操作切換畫面) 大家看，AI 現在變成認識我的同事了！
+          備案：若無網路，切換至預錄影片。
+        </aside>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- MODULE 07: 三個真實用法 -->
+      <!-- ========================================== -->
+      <section class="section-divider">
+        <div class="subtitle fade-up">MODULE 07</div>
+        <h2 class="gradient-text fade-up delay-1">三個真實用法</h2>
+      </section>
+
+      <section>
+        <div class="module-label">MODULE 07 / 真實用法 1</div>
+        <h2 class="text-left">用法 ① 拆解程式專案</h2>
+        <div class="vs-grid">
+          <div class="vs-card fade-up delay-1" style="border-top: none;">
+            <h3 class="text-accent">作法</h3>
+            <p>把寫過的專案 (如 EvoCode, TradeApi) 架構與文件存入 Obsidian。</p>
+          </div>
+          <div class="vs-card fade-up delay-2" style="border-top: none;">
+            <h3 class="text-success">累積效果</h3>
+            <p>下次寫類似功能，AI 直接參考你的舊 code，不用從零教起。</p>
+            <p class="text-dim" style="font-size: 0.8em;">"一次寫，永遠用，到處用。"</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="module-label">MODULE 07 / 真實用法 2 & 3</div>
+        
+        <div class="card-grid">
+          <div class="grid-card fade-up delay-1" style="grid-column: span 2;">
+            <h3 class="text-accent">用法 ② 讀書不再消失</h3>
+            <p>邊看《遊戲化實戰》、《裸 K 線交易法》，邊把重點記進 Obsidian，並與自己的想法連結。</p>
+            <p class="text-success" style="margin-top: 10px;">➜ 書讀完不是結束，是 AI 幫你產生新策略的起點。</p>
+          </div>
+          
+          <div class="grid-card fade-up delay-2">
+            <h3 class="text-accent">用法 ③ Daily Note</h3>
+            <p>每天開一則筆記，紀錄今天的靈感、解掉的 Bug、看到的好文章。</p>
+            <p class="text-success" style="margin-top: 10px;">➜ 點滴累積，成為 AI 挖掘的寶礦。</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- MODULE 08: HANDOFF 模式 (Optional) -->
+      <!-- ========================================== -->
+      <section>
+        <div class="module-label">MODULE 08 / 進階心法</div>
+        <h2 class="text-left text-dim">HANDOFF 模式 (交接筆記)</h2>
+        <p class="text-left fade-up">如何讓不同的 AI 對話、不同的工具保持記憶連貫？</p>
+        <pre class="fade-up delay-1"><code class="language-markdown" data-trim data-noescape>
+# HANDOFF: 交易策略開發進度
+
+## 目前狀態
+- 已完成 MA 交叉邏輯
+- 遇到停損計算的 Bug (Line 45)
+
+## 下一步 (給 AI 的指示)
+1. 幫我檢查停損邏輯為何會觸發錯誤
+2. 修正後輸出完整函數
+        </code></pre>
+        <p class="text-dim text-left fade-up delay-2" style="font-size: 0.8em;">將這段存進 Obsidian。開新對話時，請 AI 先讀這篇 <code>HANDOFF</code> 筆記，無縫接軌。</p>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- MODULE 09: 三階段行動清單 -->
+      <!-- ========================================== -->
+      <section class="section-divider">
+        <div class="subtitle fade-up">MODULE 09</div>
+        <h2 class="gradient-text fade-up delay-1">三階段行動清單</h2>
+      </section>
+
+      <section>
+        <div class="module-label">MODULE 09 / 行動清單</div>
+        <div class="card-grid">
+          <div class="grid-card fade-up delay-1" style="transform: translateY(0);">
+            <h3 class="mono text-dim">W1 第一週</h3>
+            <ul style="padding-left: 20px;">
+              <li>下載安裝 Obsidian</li>
+              <li>建立你的第一個 Vault</li>
+              <li>寫下第一篇 Daily Note</li>
+            </ul>
+          </div>
+          <div class="grid-card fade-up delay-2" style="transform: translateY(-15px);">
+            <h3 class="mono text-accent">M1 第一個月</h3>
+            <ul style="padding-left: 20px;">
+              <li>養成打開 Obsidian 的習慣</li>
+              <li>安裝基礎 Plugin</li>
+              <li>每週整理一份重要知識/筆記</li>
+            </ul>
+          </div>
+          <div class="grid-card fade-up delay-3" style="transform: translateY(-30px);">
+            <h3 class="mono text-secondary">M3 第三個月</h3>
+            <ul style="padding-left: 20px;">
+              <li>開始感受知識複利的威力</li>
+              <li>設定 Claude Desktop + MCP 串接</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- MODULE 10: 身分選擇 -->
+      <!-- ========================================== -->
+      <section>
+        <div class="module-label">MODULE 10 / 身分選擇</div>
+        <h2 class="text-left">五年後的你，會是哪一種？</h2>
+        <div class="vs-grid" style="margin-top: 50px;">
+          <div class="vs-card bad fade-up delay-1 slide-in-left">
+            <h3 style="text-align:center;">A 型 (沒累積)</h3>
+            <p>每次遇到問題都要重新 Google、重新問 AI。知識停留在腦中，隨著時間遺忘。</p>
+            <p class="text-danger" style="text-align:center; font-weight:bold; margin-top: 20px;">被 AI 取代</p>
+          </div>
+          <div class="vs-card good fade-up delay-3 slide-in-right">
+            <h3 style="text-align:center;">B 型 (有複利)</h3>
+            <p>擁有龐大的個人資料庫。遇到問題，AI 結合你五年的經驗給出獨特解法。</p>
+            <p class="text-success" style="text-align:center; font-weight:bold; margin-top: 20px;">駕馭 AI</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="module-label">MODULE 10 / 結尾</div>
+        <div class="core-quote fade-up delay-1" style="font-size: 2.2em; padding: 60px;">
+          「AI 不會取代你，<br>
+          <span class="text-accent">但 AI 會取代不會用 AI 累積自己的人。</span>」
+        </div>
+        
+        <div class="fade-up delay-2" style="background: var(--card-bg); padding: 20px; border-radius: 10px; display: inline-block; margin-top: 30px;">
+          <h4 class="text-accent" style="margin: 0 0 10px 0;">今晚的功課：</h4>
+          <ol style="text-align: left; font-size: 0.8em; margin: 0 0 0 20px;">
+            <li>下載 Obsidian</li>
+            <li>建 Vault</li>
+            <li>寫下一句你今天學到的話</li>
+            <li>存檔</li>
+          </ol>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="gradient-text fade-up">Thank You</h2>
+        <p class="fade-up delay-1">開始建立你的第二大腦吧！</p>
+        
+        <div class="fade-up delay-2" style="margin-top: 50px; display: flex; justify-content: center; align-items: center; gap: 30px;">
+          <div>
+            <img src="https://qr-official.line.me/gs/M_698mljhz_BW.png" alt="LINE QR Code" style="width: 200px; border-radius: 10px;">
+          </div>
+          <div class="text-left">
+            <p class="text-dim" style="margin: 0; font-size: 0.8em;">講師：廖梓棋</p>
+            <p style="font-size: 1.5em; font-weight: bold; margin: 10px 0;">LINE ID:</p>
+            <p class="mono text-accent" style="font-size: 1.5em; margin: 0;">csdm67931</p>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Reveal.js Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/plugin/notes/notes.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/plugin/markdown/markdown.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.0.4/plugin/highlight/highlight.js"></script>
+  
+  <script>
+    Reveal.initialize({
+      width: 1280,
+      height: 800,
+      margin: 0.1,
+      hash: true,
+      transition: 'slide',
+      backgroundTransition: 'fade',
+      plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+    });
+  </script>
+</body>
+</html>
